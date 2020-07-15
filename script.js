@@ -1,5 +1,5 @@
 const INCOME_TAX = 0.35;
-const PROFIT_TAX = 0.2;
+const PROFIT_TAX = 0.25;
 const PURCHASE_VALUE = 46;
 
 let STOCK_COUNT = null;

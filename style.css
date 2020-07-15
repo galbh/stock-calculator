@@ -1,15 +1,39 @@
 body {
-  font-family: sans-serif;
+  font-family: 'Great Vibes';
   margin: 0;
+  font-size: 18px;
+}
+
+input {
+  font-family: 'Great Vibes';
 }
 
 main {
   padding: 32px;
-  font-size: 12px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: calc(100% - 64px);
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+@media (max-width: 900px) {
+  .wrapper {
+    flex-direction: column;
+  } 
+}
+
+.container {
+  text-transform: capitalize;
+  line-height: 33px;
+}
+
+.container span {
+  font-weight: bold;
 }
 
 input {

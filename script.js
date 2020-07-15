@@ -22,16 +22,21 @@ const fetchDollarValue = () => {
 }
 
 const fetchData = () => {
-  fetchStockValue().then(res => STOCK_VALUE = res.c)
+  return fetchStockValue().then(res => STOCK_VALUE = res.c)
     .then(fetchDollarValue)
     .then(res => DOLLAR_VALUE = res.rates.ILS);
 }
 
+const setHtml = () => {
+  document.querySelector('form').style = 'display:block';
+  document.querySelector('.dollar-value').innerHTML = `<span>dollar value: </span>${DOLLAR_VALUE}`;
+  document.querySelector('.stock-value').innerHTML = `<span>stock value: </span> ${STOCK_VALUE}`;
+  document.querySelector('form input').focus();
+}
+
 const setInitialState = () => {
   if (finhubToken) {
-    document.querySelector('form').style = 'display:block';
-    document.querySelector('form input').focus();
-    fetchData();
+    fetchData().then(setHtml);
     if (!localStorage.getItem(STORAGE_KEY)) {
       localStorage.setItem(STORAGE_KEY, finhubToken);
     } else {

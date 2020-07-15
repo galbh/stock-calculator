@@ -2,18 +2,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Stock Calculator</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Great+Vibes">
+  <link rel="shortcut icon" href="https://freepngimg.com/download/money/25428-3-money-bag-photos.png" type="image/x-icon">
   <link rel="stylesheet" href="style.css">
 
 </head>
 <body>
   
   <main>
-    <form onsubmit="onSubmit(event)">
-      <input class="stock-count" type="number" placeholder="stock count">
-      <input type="submit" value="submit">
-    </form>
-  
+    <div class="wrapper">
+      <form onsubmit="onSubmit(event)">
+        <input class="stock-count" type="number" placeholder="stock count">
+        <input type="submit" value="submit">
+      </form>
+    
+      <div class="container">
+        <div class="dollar-value"></div>
+        <div class="stock-value"></div>
+      </div>
+    </div>
+    
     <div class="value"></div>
     <div class="error"></div>
   </main>

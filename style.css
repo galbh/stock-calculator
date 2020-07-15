@@ -1,0 +1,32 @@
+body {
+  font-family: sans-serif;
+  margin: 0;
+}
+
+main {
+  padding: 32px;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: calc(100% - 64px);
+}
+
+input {
+  font-size: 12px;
+}
+
+form, .value {
+  display: none;
+}
+
+.value {
+  box-shadow: 1px 1px 5px #aa7e7e;
+  padding: 32px;
+  font-size: 23px;
+  text-align: center;
+  width: max-content;
+  align-self: center;
+  border-radius: 5px;
+  font-weight: bold;
+}

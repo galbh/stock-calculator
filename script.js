@@ -6,19 +6,45 @@ let STOCK_COUNT = null;
 let STOCK_VALUE = null;
 let DOLLAR_VALUE = null;
 
-const getStockValue = () => {
-  return fetch(`https://finnhub.io/api/v1/quote?symbol=SEDG`)
+const STORAGE_KEY = 'finhub-token';
+
+const queryParam = window.location.search.split('?token=')[1];
+const finhubToken = localStorage.getItem(STORAGE_KEY) || queryParam;
+
+const fetchStockValue = () => {
+  return fetch(`https://finnhub.io/api/v1/quote?symbol=SEDG;token=${finhubToken}`)
     .then(res => res.json());
 }
 
-const getDollarValue = () => {
+const fetchDollarValue = () => {
   return fetch('https://api.exchangeratesapi.io/latest?base=USD;symbols=ILS')
     .then(res => res.json());
 }
 
-getStockValue().then(res => STOCK_VALUE = res.c)
-  .then(getDollarValue)
-  .then(res => DOLLAR_VALUE = res.rates.ILS);
+const fetchData = () => {
+  fetchStockValue().then(res => STOCK_VALUE = res.c)
+    .then(fetchDollarValue)
+    .then(res => DOLLAR_VALUE = res.rates.ILS);
+}
+
+const setInitialState = () => {
+  if (finhubToken) {
+    document.querySelector('form').style = 'display:block';
+    document.querySelector('form input').focus();
+    fetchData();
+    if (!localStorage.getItem(STORAGE_KEY)) {
+      localStorage.setItem(STORAGE_KEY, finhubToken);
+    } else {
+      if (!queryParam) {
+        window.location.search = `token=${finhubToken}`;
+      }
+    }
+  } else {
+    document.querySelector('.error').innerHTML = 'Finhub token is missing in url query params (?token=SECRET)'
+  }
+}
+
+setInitialState();
 
 const onSubmit = (e) => {
   e.preventDefault();
@@ -27,7 +53,7 @@ const onSubmit = (e) => {
   STOCK_COUNT = parseInt(count);
   const total = getTotalInShekel();
   element.style = 'display:block';
-  element.innerHTML = `${total.toFixed(2)}₪`;
+  element.innerHTML = `${total.toFixed(2)} ₪`;
 }
 
 const getTotalValue = () => STOCK_COUNT * STOCK_VALUE

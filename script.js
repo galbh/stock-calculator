@@ -7,7 +7,7 @@ let STOCK_VALUE = null;
 let DOLLAR_VALUE = null;
 
 const getStockValue = () => {
-  return fetch(`https://finnhub.io/api/v1/quote?symbol=SEDG;token=${window.FINHUB_TOKEN}`)
+  return fetch(`https://finnhub.io/api/v1/quote?symbol=SEDG`)
     .then(res => res.json());
 }
 
